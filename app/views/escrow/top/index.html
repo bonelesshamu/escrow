@@ -1,1 +1,97 @@
-<p> escrow index </p>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+    <title>Escrow</title>
+
+    <!-- Bootstrap core CSS -->
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" id="themesid">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/examples/offcanvas/offcanvas.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1 class="jumbotron text-info text-center mb2">escrow status</h1>
+        <div class="col-xs-12 col-sm-12">
+	  <table>
+	    <tr>
+	      <td>チケット名</td>
+	      <td>チケットID</td>
+	      <td>価格</td>
+	      <td>所有者</td>
+	    </tr>
+	    <% @Ticket.each do |ticket| %>
+	    <tr>
+	      <% if ticket.escrow == true %>
+	      <td><%= ticket.name %></td>
+	      <td><%= ticket.ticket_id %></td>
+	      <td><%= ticket.price %></td>
+	      <td><%= ticket.owner %></td>
+	      <% end %>
+	    </tr>
+	    <% end %>
+	  </table>
+	</div>
+      </div><!--/row-->
+      
+      <footer class="footer">
+        <p>hoge</p>
+      </footer>
+    </div><!--/.container-->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://getbootstrap.com/examples/offcanvas/offcanvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+    <script src="https://cdn.mlkcca.com/v0.6.0/milkcocoa.js"></script>
+<!--
+    <%= javascript_include_tag 'jquery.blockUI' %>
+    <script>
+      $(function(){
+      $('#form').validator().on('submit', function(e) {
+      if (e.isDefaultPrevented()) {
+      } else {
+      }
+      });
+      
+      if(!navigator.cookieEnabled) {
+      blockUI.show('cookieを有効にしてください。');
+      }
+      });
+    </script>
+-->
+    <style>
+      .footer {
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 0%;
+      }
+      .mb1{
+        margin-bottom: 1em;
+      }
+      .mb2{
+        margin-bottom: 2em;
+      }
+      .mb5{
+        margin-bottom: 5em;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        border: solid 1px;
+        padding: 0.5em;
+      }
+    </style>
+  </body>
+</html>

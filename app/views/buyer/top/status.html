@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="">
-    <title>Seller</title>
+    <title>Buyer</title>
 
     <!-- Bootstrap core CSS -->
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" id="themesid">
@@ -19,26 +19,48 @@
   <body>
     <div class="container">
       <div class="row">
-        <h1 class="text-primary text-center mb2">seller home</h1>
+        <h1 class="jumbotron text-info text-center mb2">チケット所有状況</h1>
         <div class="col-xs-12 col-sm-12">
-          <form id="form" data-toggle="validator" action="status" role="form" method="get">
+          <form id="form" data-toggle="validator" action="index" role="form" method="get">
             <div class="form-group">
-              <button type="submit" class="btn btn-info btn-lg btn-block">チケット状態確認</button>
+              <button type="submit" class="btn btn-info btn-lg btn-block">ホームに戻る</button>
 	    </div>
           </form>
-          <form id="form" data-toggle="validator" action="issue" role="form" method="get">
-<!--
-            <div class="form-group has-feedback mb2">
-              <input type="text" name="name" id="name" class="form-control input-lg text-center" placeholder="名前を入れて下さい" maxlength="15" data-pattern-error="英数字以外の文字が入力されています" data-required-error="名前は必須です" required>
-	      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-	      <div class="help-block with-errors"></div>
-            </div>
--->
-            <div class="form-group">
-              <button type="submit" class="btn btn-info btn-lg btn-block">チケット発行</button>
-            </div>
-	  </form>
-        </div><!--/.col-xs-12.col-sm-9-->  
+	  <table>
+	    <tr>
+	      <td>チケット名</td>
+	      <td>チケットID</td>
+	      <td>価格</td>
+	      <td>所有者</td>
+	      <td>エントリー</td>
+	    </tr>
+	    <% @Ticket.each do |ticket| %>
+	    <tr>
+	      <% if ticket.owner == "buyer" %>
+	      <td><%= ticket.name %></td>
+	      <td><%= ticket.ticket_id %></td>
+	      <td><%= ticket.price %></td>
+	      <td><%= ticket.owner %></td>
+	      <td>
+		<% if ticket.escrow == false %>
+		<form id="form" data-toggle="validator" action="status" role="form" method="get">
+		  <div class="form-group">
+		    <input type="hidden" name="name" value=<%= ticket.name %> >
+		    <input type="hidden" name="ticket_id" value=<%= ticket.ticket_id %> >
+		    <input type="hidden" name="price" value=<%= ticket.price %> >
+		    <input type="hidden" name="owner" value=<%= ticket.owner %> >
+		    <button type="submit" class="btn btn-info btn-lg btn-block">出品する</button>
+		  </div>
+		</form>
+		<% else %>
+		<button type="submit" class="btn btn-warning btn-lg btn-block">出品済み</button>
+		<% end %>
+	      </td>
+	      <% end %>
+	    </tr>
+	    <% end %>
+	  </table>
+	</div>
       </div><!--/row-->
       
       <footer class="footer">
@@ -84,6 +106,14 @@
       .mb5{
         margin-bottom: 5em;
       }
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        border: solid 1px;
+        padding: 0.5em;
+      }
     </style>
   </body>
 </html>
+

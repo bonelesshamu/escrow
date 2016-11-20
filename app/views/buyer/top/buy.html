@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="">
-    <title>Seller</title>
+    <title>Buyer</title>
 
     <!-- Bootstrap core CSS -->
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" id="themesid">
@@ -19,26 +19,65 @@
   <body>
     <div class="container">
       <div class="row">
-        <h1 class="text-primary text-center mb2">seller home</h1>
+        <h1 class="jumbotron text-info text-center mb2">支払い手段選択</h1>
         <div class="col-xs-12 col-sm-12">
-          <form id="form" data-toggle="validator" action="status" role="form" method="get">
-            <div class="form-group">
-              <button type="submit" class="btn btn-info btn-lg btn-block">チケット状態確認</button>
-	    </div>
-          </form>
-          <form id="form" data-toggle="validator" action="issue" role="form" method="get">
-<!--
-            <div class="form-group has-feedback mb2">
-              <input type="text" name="name" id="name" class="form-control input-lg text-center" placeholder="名前を入れて下さい" maxlength="15" data-pattern-error="英数字以外の文字が入力されています" data-required-error="名前は必須です" required>
-	      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-	      <div class="help-block with-errors"></div>
-            </div>
--->
-            <div class="form-group">
-              <button type="submit" class="btn btn-info btn-lg btn-block">チケット発行</button>
-            </div>
-	  </form>
-        </div><!--/.col-xs-12.col-sm-9-->  
+          <h3 class="text-info text-warning">銀行口座</h3>
+	  <table class="mb4">
+	    <tr>
+	      <td>東京中央銀行</td>
+	      <td><%= @balance %></td>
+	      <td>
+		<form id="form" data-toggle="validator" action="confirm" role="form" method="get">
+		  <div class="form-group">
+		    <input type="hidden" name="name" value=<%= @name %> >
+		    <input type="hidden" name="ticket_id" value=<%= @ticket_id %> >
+		    <input type="hidden" name="price" value=<%= @price %> >
+		    <input type="hidden" name="owner" value=<%= @owner %> >
+		    <input type="hidden" name="balance" value=<%= @balance %> >
+		    <input type="hidden" name="bank" value="bank1" >
+		    <button type="submit" class="btn btn-info btn-lg btn-block">購入手続きへ</button>
+		  </div>
+		</form>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>白泉銀行</td>
+	      <td>200,000</td>
+	      <td>
+		<form id="form" data-toggle="validator" action="buy" role="form" method="post">
+		  <div class="form-group">
+		    <button type="submit" class="btn btn-info btn-lg btn-block">選択不可</button>
+		  </div>
+		</form>
+	      </td>
+	    </tr>
+	  </table>
+          <h3 class="text-info text-warning">クレジットカード</h3>
+	  <table class="mb4">
+	    <tr>
+	      <td>1</td>
+	      <td>XXXX-XXXX-XXXX-####</td>
+	      <td>
+		<form id="form" data-toggle="validator" action="buy" role="form" method="post">
+		  <div class="form-group">
+		    <button type="submit" class="btn btn-info btn-lg btn-block">選択不可</button>
+		  </div>
+		</form>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>2</td>
+	      <td>XXXX-XXXX-XXXX-$$$$</td>
+	      <td>
+		<form id="form" data-toggle="validator" action="buy" role="form" method="post">
+		  <div class="form-group">
+		    <button type="submit" class="btn btn-info btn-lg btn-block">選択不可</button>
+		  </div>
+		</form>
+	      </td>
+	    </tr>
+	  </table>
+	</div>
       </div><!--/row-->
       
       <footer class="footer">
@@ -84,6 +123,14 @@
       .mb5{
         margin-bottom: 5em;
       }
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        border: solid 1px;
+        padding: 0.5em;
+      }
     </style>
   </body>
 </html>
+

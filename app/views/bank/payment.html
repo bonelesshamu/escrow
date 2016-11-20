@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="">
-    <title>Seller</title>
+    <title>Buyger</title>
 
     <!-- Bootstrap core CSS -->
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" id="themesid">
@@ -19,25 +19,57 @@
   <body>
     <div class="container">
       <div class="row">
-        <h1 class="text-primary text-center mb2">seller home</h1>
+        <h1 class="jumbotron text-info text-center mb2">支払い内容確認</h1>
+
         <div class="col-xs-12 col-sm-12">
-          <form id="form" data-toggle="validator" action="status" role="form" method="get">
-            <div class="form-group">
-              <button type="submit" class="btn btn-info btn-lg btn-block">チケット状態確認</button>
+	  <h3 class="text-info text-warning">購入対象</h3>
+	  <table>
+	    <tr>
+	      <td>チケット</td>
+	      <td><%= @name %></td>
+	    </tr>
+	    <tr>
+	      <td>チケットID</td>
+	      <td><%= @ticket_id %></td>
+	    </tr>
+	    <tr>
+	      <td>価格</td>
+	      <td><%= @price %></td>
+	    </tr>
+	  </table>
+
+	  <h3 class="text-info text-warning">支払い方法</h3>
+	  <table>
+	    <tr>
+	      <td>利用銀行</td>
+	      <td>東京中央銀行</td>
+	    </tr>
+	    <tr>
+	      <td>送金元</td>
+	      <td><%= @buyer %></td>
+	    </tr>	    
+	    <tr>
+	      <td>現残高</td>
+	      <td>300,000</td>
+	    </tr>
+	    <tr>
+	      <td>送金先</td>
+	      <td>seller</td>
+	    </tr>
+	  </table>
+
+
+          <form id="form" data-toggle="validator" action="../bank/payment" role="form" method="get">
+            <div class="form-group mt4">
+	      <input type="hidden" name="name" value=<%= @name %> >
+	      <input type="hidden" name="ticket_id" value=<%= @ticket_id %> >
+	      <input type="hidden" name="price" value=<%= @price %> >
+	      <input type="hidden" name="owner" value=<%= @owner %> >
+	      <input type="hidden" name="bank" value="bank" >
+	      <input type="hidden" name="buyer" value="buyer" >
+              <button type="submit" class="btn btn-info btn-lg btn-block">支払い実行</button>
 	    </div>
           </form>
-          <form id="form" data-toggle="validator" action="issue" role="form" method="get">
-<!--
-            <div class="form-group has-feedback mb2">
-              <input type="text" name="name" id="name" class="form-control input-lg text-center" placeholder="名前を入れて下さい" maxlength="15" data-pattern-error="英数字以外の文字が入力されています" data-required-error="名前は必須です" required>
-	      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-	      <div class="help-block with-errors"></div>
-            </div>
--->
-            <div class="form-group">
-              <button type="submit" class="btn btn-info btn-lg btn-block">チケット発行</button>
-            </div>
-	  </form>
         </div><!--/.col-xs-12.col-sm-9-->  
       </div><!--/row-->
       
@@ -83,6 +115,16 @@
       }
       .mb5{
         margin-bottom: 5em;
+      }
+      .mt4{
+        margin-top: 4em;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        border: solid 1px;
+        padding: 0.5em;
       }
     </style>
   </body>
